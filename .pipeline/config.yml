@@ -1,20 +1,22 @@
-# General settings for the pipeline
 general:
   collectTelemetryData: false
 
 stages:
-  # The init stage connects to CPI using your service key
   init:
     integrationSuite:
-      # This ID must match the credential you created in Step 2
+      downloadStrategy: 'default'
       apiServiceKey: 'cpi-service-key'
 
-  # The deploy stage pushes the iFlow and applies the configuration
+  build:
+    integrationSuite:
+      buildSteps:
+        - buildStrategy: 'IntegrationFlow'
+          filePath: 'calling_iflows_from_other_cpi_account.zip'
+        - buildStrategy: 'Configuration'
+          filePath: 'prod_config.json'
+
   deploy:
     integrationSuite:
       deploySteps:
         - deployStrategy: 'IntegrationFlow'
-          # The name of your iFlow .zip file in GitHub
           filePath: 'calling_iflows_from_other_cpi_account.zip'
-          # The name of your JSON config file in GitHub
-          configurationFilePath: 'prod_config.json'
