@@ -1,15 +1,20 @@
 # General settings for the pipeline
 general:
-  cpiApiServiceKeyCredentialsId: "desgauthapikey"
+  collectTelemetryData: false
 
-# Define the pipeline stages
 stages:
-  # This single stage will deploy the iFlow and update the URL
-  Deploy:
-    steps:
-      - name: "Deploy iFlow and Update Address"
-        cloudIntegrationDeploy:
-          packageId: "dev_tenant_cicd"
-          integrationFlowId: "calling_iflows_from_other_cpi_account_Created"
-          filePath: "calling_iflows_from_other_cpi_account.zip"
-          configurationFile: "prod_config.json"
+  # The init stage connects to CPI using your service key
+  init:
+    integrationSuite:
+      # This ID must match the credential you created in Step 2
+      apiServiceKey: 'cpi-service-key'
+
+  # The deploy stage pushes the iFlow and applies the configuration
+  deploy:
+    integrationSuite:
+      deploySteps:
+        - deployStrategy: 'IntegrationFlow'
+          # The name of your iFlow .zip file in GitHub
+          filePath: 'calling_iflows_from_other_cpi_account.zip'
+          # The name of your JSON config file in GitHub
+          configurationFilePath: 'prod_config.json'
