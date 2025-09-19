@@ -12,8 +12,4 @@ stages:
 
 steps:
   integrationArtifactUpload:
-    # --- These required lines were missing from the template ---
-    packageId: "dev_tenant_cicd"
-    filePath: "calling_iflows_from_other_cpi_account.zip"
-    # ---
     integrationFlowName: "calling_iflows_from_other_cpi_account_Created"
