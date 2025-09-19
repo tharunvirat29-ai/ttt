@@ -16,5 +16,5 @@ stages:
 # Steps configuration
 steps:
   integrationArtifactUpload:
-    packageId: "dev_tenant_cicd"
+    packageId: "devtenantcicd"
     integrationFlowName: "calling_iflows_from_other_cpi_account_Created"
