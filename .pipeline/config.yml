@@ -1,15 +1,20 @@
+# Project configuration
 general:
   cpiApiServiceKeyCredentialsId: "desgauthapikey"
   integrationFlowId: "calling_iflows_from_other_cpi_account_Created"
 
+# Stage configuration
 stages:
-  Upload:
+  uploadStage:
     enabled: true
-  Deploy:
-    enabled: false
-  Integration Test:
+  deployStage:
+    enabled: true
+  # Disabled because no test is set up
+  integrationTestStage:
     enabled: false
 
+# Steps configuration
 steps:
   integrationArtifactUpload:
+    packageId: "dev_tenant_cicd"
     integrationFlowName: "calling_iflows_from_other_cpi_account_Created"
