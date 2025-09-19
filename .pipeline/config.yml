@@ -1,16 +1,19 @@
-# General settings for the pipeline
 general:
   cpiApiServiceKeyCredentialsId: "desgauthapikey"
+  integrationFlowId: "calling_iflows_from_other_cpi_account_Created"
 
-# Define the pipeline stages
 stages:
-  # This single stage will deploy the iFlow and update the URL
+  Upload:
+    enabled: true
   Deploy:
-    steps:
-      - name: "Deploy iFlow and Update URL"
-        cloudIntegrationDeploy:
-          packageId: "dev_tenant_cicd"
-          integrationFlowId: "calling_iflows_from_other_cpi_account_Created"
-          filePath: "calling_iflows_from_other_cpi_account.zip"
-          # This is the line that changes the URL
-          configurationFile: "prod_config.json"
+    enabled: false
+  Integration Test:
+    enabled: false
+
+steps:
+  integrationArtifactUpload:
+    # --- These required lines were missing from the template ---
+    packageId: "dev_tenant_cicd"
+    filePath: "calling_iflows_from_other_cpi_account.zip"
+    # ---
+    integrationFlowName: "calling_iflows_from_other_cpi_account_Created"
