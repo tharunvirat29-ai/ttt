@@ -1,22 +1,17 @@
 general:
-  collectTelemetryData: false
+  cpiApiServiceKeyCredentialsId: "INTEGRATION_SUITE_SERVICE_KEY"
 
 stages:
-  init:
+  Upload:
+    enabled: true
+  Deploy:
+    enabled: true
     integrationSuite:
-      downloadStrategy: 'default'
-      apiServiceKey: 'cpi-service-key'
+      parameterFile: 'prod_config.json'  # This is the key for parameter substitution
 
-  build:
-    integrationSuite:
-      buildSteps:
-        - buildStrategy: 'IntegrationFlow'
-          filePath: 'calling_iflows_from_other_cpi_account.zip'
-        - buildStrategy: 'Configuration'
-          filePath: 'prod_config.json'
-
-  deploy:
-    integrationSuite:
-      deploySteps:
-        - deployStrategy: 'IntegrationFlow'
-          filePath: 'calling_iflows_from_other_cpi_account.zip'
+steps:
+  integrationArtifactUpload:
+    integrationFlowName: "calling_iflows_from_other_cpi_account"
+  
+  integrationArtifactDeploy:
+    integrationFlowName: "calling_iflows_from_other_cpi_account"
